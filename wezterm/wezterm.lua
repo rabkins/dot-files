@@ -10,7 +10,10 @@ end
 
 config.default_workspace = 'rabkins'
 config.color_scheme = 'Gruvbox dark, soft (base16)'
-config.font = wezterm.font 'Inconsolata Nerd Font'
+config.font = wezterm.font_with_fallback {
+  'Inconsolata Nerd Font',
+  'Jetbrains Mono',
+}
 config.font_size = 26
 config.cell_width = 0.9
 

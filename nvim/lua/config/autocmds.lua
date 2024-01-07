@@ -1,0 +1,8 @@
+-- Open popup window for diagnostic messages on cursor
+-- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+--   pattern = { '*.py' },
+--   callback = function(_)
+--     vim.diagnostic.open_float(nil, { focus = false })
+--   end,
+-- })
+--

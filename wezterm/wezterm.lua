@@ -80,14 +80,6 @@ config.keys = {
   { key = '}', mods = 'LEADER|SHIFT', action = act.MoveTabRelative(1) },
 }
 
-for i = 1, 9 do
-  table.insert(config.keys, {
-    key = tostring(i),
-    mods = 'LEADER',
-    action = act.ActivateTab(i - 1),
-  })
-end
-
 config.key_tables = {
   resize_pane = {
     { key = 'h', action = act.AdjustPaneSize { 'Left', 1 } },

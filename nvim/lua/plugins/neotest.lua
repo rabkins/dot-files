@@ -10,6 +10,9 @@ return {
     adapters = {
       ['neotest-python'] = {
         runner = 'pytest',
+        dap = {
+          justMyCode = false,
+        },
       },
       ['neotest-rust'] = {
         args = { '--no-capture' },

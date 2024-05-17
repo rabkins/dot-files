@@ -14,7 +14,7 @@ return {
         'pylint',
         'pyright',
         'ruff',
-        'rust-analyzer',
+        -- 'rust-analyzer',
         'sql-formatter',
         'sqlls',
         'terraform-ls',

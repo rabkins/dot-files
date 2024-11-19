@@ -8,4 +8,8 @@ return {
     'folke/flash.nvim',
     enabled = false,
   },
+  {
+    'tpope/vim-fugitive',
+    enabled = true,
+  },
 }

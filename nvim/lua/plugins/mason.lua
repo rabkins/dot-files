@@ -4,8 +4,8 @@ return {
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         'bash-language-server',
-        'black',
         'codelldb',
+        'debugpy',
         'go-debug-adapter',
         'goimports',
         'gopls',
@@ -14,11 +14,13 @@ return {
         'pylint',
         'pyright',
         'ruff',
-        -- 'rust-analyzer',
+        'ruff-lsp',
         'sql-formatter',
         'sqlls',
         'terraform-ls',
+        'xmlformatter',
         'yaml-language-server',
+        'yamlfmt',
       })
     end,
   },

@@ -2,9 +2,10 @@ return {
   'nvim-neotest/neotest',
   optional = true,
   dependencies = {
+    'nvim-neotest/nvim-nio',
     'nvim-neotest/neotest-python',
     'nvim-neotest/neotest-plenary',
-    'rouge8/neotest-rust',
+    'mrcjkb/rustaceanvim',
   },
   opts = {
     adapters = {
@@ -13,11 +14,11 @@ return {
         dap = {
           justMyCode = false,
         },
+        -- args = {
+        --   '-m integration -p no:warnings',
+        -- },
       },
-      ['neotest-rust'] = {
-        args = { '--no-capture' },
-        dap_adapter = 'codelldb',
-      },
+      ['rustaceanvim.neotest'] = {},
     },
   },
 }

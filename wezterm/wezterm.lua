@@ -11,6 +11,7 @@ end
 config.default_workspace = 'rabkins'
 config.color_scheme = 'Gruvbox dark, soft (base16)'
 config.font = wezterm.font_with_fallback {
+  'CodeNewRoman Nerd Font Mono',
   'D2CodingLigature Nerd Font Mono',
   'Inconsolata Nerd Font',
   'Jetbrains Mono',
@@ -42,12 +43,12 @@ config.keys = {
   { key = 'phys:Space', mods = 'LEADER', action = act.ActivateCommandPalette },
 
   -- pane keybindings
-  { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-  { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-  { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
-  { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
-  { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
-  { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
+  -- { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+  -- { key = 'v', mods = 'LEADER', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  -- { key = 'h', mods = 'LEADER', action = act.ActivatePaneDirection 'Left' },
+  -- { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
+  -- { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
+  -- { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
   { key = 'q', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
   { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 'o', mods = 'LEADER', action = act.RotatePanes 'Clockwise' },
@@ -82,18 +83,18 @@ config.keys = {
 }
 
 config.key_tables = {
-  resize_pane = {
-    { key = 'h', action = act.AdjustPaneSize { 'Left', 1 } },
-    { key = 'j', action = act.AdjustPaneSize { 'Down', 1 } },
-    { key = 'k', action = act.AdjustPaneSize { 'Up', 1 } },
-    { key = 'l', action = act.AdjustPaneSize { 'Right', 1 } },
-    { key = 'Escape', action = 'PopKeyTable' },
-    { key = 'Enter', action = 'PopKeyTable' },
-  },
+  -- resize_pane = {
+  --   { key = 'h', action = act.AdjustPaneSize { 'Left', 1 } },
+  --   { key = 'j', action = act.AdjustPaneSize { 'Down', 1 } },
+  --   { key = 'k', action = act.AdjustPaneSize { 'Up', 1 } },
+  --   { key = 'l', action = act.AdjustPaneSize { 'Right', 1 } },
+  --   { key = 'Escape', action = 'PopKeyTable' },
+  --   { key = 'Enter', action = 'PopKeyTable' },
+  -- },
   move_tab = {
     { key = 'h', action = act.MoveTabRelative(-1) },
-    { key = 'j', action = act.MoveTabRelative(-1) },
-    { key = 'k', action = act.MoveTabRelative(1) },
+    -- { key = 'j', action = act.MoveTabRelative(-1) },
+    -- { key = 'k', action = act.MoveTabRelative(1) },
     { key = 'l', action = act.MoveTabRelative(1) },
     { key = 'Escape', action = 'PopKeyTable' },
     { key = 'Enter', action = 'PopKeyTable' },
@@ -116,7 +117,12 @@ wezterm.on('update-status', function(window, pane)
 
   local time = wezterm.strftime '%H:%M'
 
-  local cwd = pane:get_current_working_dir() or ERROR_ICON
+  local cwd = pane:get_current_working_dir()
+  if cwd ~= nil and cwd.scheme == 'file' then
+    cwd = cwd.file_path
+  else
+    cwd = ERROR_ICON
+  end
   local cwd_rx = '(.*://' .. wezterm.hostname() .. wezterm.home_dir .. ')/(.*)'
   cwd = string.gsub(cwd, cwd_rx, '%2')
 

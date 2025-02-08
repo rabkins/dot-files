@@ -11,8 +11,8 @@ end
 config.default_workspace = 'rabkins'
 config.color_scheme = 'Gruvbox dark, soft (base16)'
 config.font = wezterm.font_with_fallback {
-  'CodeNewRoman Nerd Font Mono',
   'D2CodingLigature Nerd Font Mono',
+  'CodeNewRoman Nerd Font Mono',
   'Inconsolata Nerd Font',
   'Jetbrains Mono',
 }

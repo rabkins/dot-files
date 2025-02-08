@@ -5,3 +5,5 @@ nvim/lazyvim.json
 pudb/internal-cmdline-history.txt
 pudb/saved-breakpoints-*
 tmux/plugins
+containers/**
+github-copilot/**

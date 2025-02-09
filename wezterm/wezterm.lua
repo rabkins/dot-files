@@ -30,7 +30,7 @@ config.initial_rows = 42
 
 config.hide_tab_bar_if_only_one_tab = false
 config.quit_when_all_windows_are_closed = false
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 
 config.show_update_window = true
 
@@ -50,9 +50,9 @@ config.keys = {
   -- { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
   -- { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
   { key = 'q', mods = 'LEADER', action = act.CloseCurrentPane { confirm = true } },
-  { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
+  -- { key = 'z', mods = 'LEADER', action = act.TogglePaneZoomState },
   { key = 'o', mods = 'LEADER', action = act.RotatePanes 'Clockwise' },
-  { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+  -- { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
 
   -- tab keybindings
   { key = 't', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
@@ -100,6 +100,17 @@ config.key_tables = {
     { key = 'Enter', action = 'PopKeyTable' },
   },
 }
+
+config.window_frame = {
+  font = wezterm.font_with_fallback {
+    'D2CodingLigature Nerd Font Mono',
+    'CodeNewRoman Nerd Font Mono',
+    'Inconsolata Nerd Font',
+    'Jetbrains Mono',
+  },
+  font_size = 16,
+}
+
 wezterm.on('update-status', function(window, pane)
   -- workspace name
   local stat = window:active_workspace()

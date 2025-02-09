@@ -1,16 +1,16 @@
 return {
-  'nvim-neotest/neotest',
+  "nvim-neotest/neotest",
   optional = true,
   dependencies = {
-    'nvim-neotest/nvim-nio',
-    'nvim-neotest/neotest-python',
-    'nvim-neotest/neotest-plenary',
-    'mrcjkb/rustaceanvim',
+    "nvim-neotest/nvim-nio",
+    "nvim-neotest/neotest-python",
+    "nvim-neotest/neotest-plenary",
+    "mrcjkb/rustaceanvim",
   },
   opts = {
     adapters = {
-      ['neotest-python'] = {
-        runner = 'pytest',
+      ["neotest-python"] = {
+        runner = "pytest",
         dap = {
           justMyCode = false,
         },
@@ -18,7 +18,7 @@ return {
         --   '-m integration -p no:warnings',
         -- },
       },
-      ['rustaceanvim.neotest'] = {},
+      ["rustaceanvim.neotest"] = {},
     },
   },
 }

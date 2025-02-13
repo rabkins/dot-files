@@ -9,6 +9,7 @@ if wezterm.config_builder then
 end
 
 config.default_workspace = 'rabkins'
+config.detect_password_input = true
 config.color_scheme = 'Gruvbox dark, soft (base16)'
 config.font = wezterm.font_with_fallback {
   'D2CodingLigature Nerd Font Mono',
@@ -17,6 +18,7 @@ config.font = wezterm.font_with_fallback {
   'Jetbrains Mono',
 }
 config.font_size = 24
+config.adjust_window_size_when_changing_font_size = false
 config.cell_width = 0.9
 
 config.window_background_opacity = 0.85

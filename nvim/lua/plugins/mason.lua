@@ -12,7 +12,6 @@ return {
         "ruff",
         "ruff-lsp",
         "sql-formatter",
-        "sqlls",
         "terraform-ls",
         "xmlformatter",
         "yaml-language-server",

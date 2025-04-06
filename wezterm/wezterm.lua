@@ -27,8 +27,8 @@ config.inactive_pane_hsb = {
   saturation = 0.75,
   brightness = 0.55,
 }
-config.initial_cols = 168
-config.initial_rows = 42
+config.initial_cols = 152
+config.initial_rows = 40
 
 config.hide_tab_bar_if_only_one_tab = false
 config.quit_when_all_windows_are_closed = false

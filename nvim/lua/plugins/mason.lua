@@ -1,6 +1,7 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
+    -- version = "1.11.0",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "bash-language-server",
@@ -10,7 +11,7 @@ return {
         "pylint",
         "pyright",
         "ruff",
-        "ruff-lsp",
+        "shellcheck",
         "sql-formatter",
         "terraform-ls",
         "xmlformatter",
@@ -19,4 +20,8 @@ return {
       })
     end,
   },
+  -- {
+  --   "mason-org/mason-lspconfig.nvim",
+  --   version = "1.32.0",
+  -- },
 }

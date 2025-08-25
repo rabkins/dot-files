@@ -8,20 +8,29 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+local function scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'Catppuccin Mocha'
+  else
+    return 'Catppuccin Latte'
+  end
+end
+
 config.default_workspace = 'rabkins'
 config.detect_password_input = true
-config.color_scheme = 'Gruvbox dark, soft (base16)'
-config.font = wezterm.font_with_fallback {
-  'D2CodingLigature Nerd Font Mono',
-  'CodeNewRoman Nerd Font Mono',
-  'Inconsolata Nerd Font',
-  'Jetbrains Mono',
-}
-config.font_size = 24
-config.adjust_window_size_when_changing_font_size = false
-config.cell_width = 0.9
+-- config.color_scheme = 'Gruvbox dark, soft (base16)'
+-- config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
+config.color_scheme = 'Catppuccin Macchiato'
 
-config.window_background_opacity = 0.85
+config.font = wezterm.font('CodeNewRoman Nerd Font Mono', { weight = 'Regular' })
+-- config.font = wezterm.font('Monaco', { weight = 'Regular', liga = 1 })
+-- config.font = wezterm.font('FiraCode Nerd Font Mono', { weight = 'Regular', liga = 1 })
+config.font_size = 18
+config.adjust_window_size_when_changing_font_size = false
+config.cell_width = 0.92
+-- config.cell_height = 2.1
+
+config.window_background_opacity = 0.95
 config.macos_window_background_blur = 20
 config.inactive_pane_hsb = {
   saturation = 0.75,
@@ -32,8 +41,7 @@ config.initial_rows = 40
 
 config.hide_tab_bar_if_only_one_tab = false
 config.quit_when_all_windows_are_closed = false
-config.use_fancy_tab_bar = true
-
+config.use_fancy_tab_bar = false
 config.show_update_window = true
 
 config.window_decorations = 'RESIZE'
@@ -43,6 +51,8 @@ config.keys = {
   { key = 'a', mods = 'LEADER|CTRL', action = act.SendKey { key = 'a', mods = 'CTRL' } },
   { key = 'c', mods = 'LEADER', action = act.ActivateCopyMode },
   { key = 'phys:Space', mods = 'LEADER', action = act.ActivateCommandPalette },
+  { key = 'LeftArrow', mods = 'OPT', action = act { SendString = '\x1bb' } },
+  { key = 'RightArrow', mods = 'OPT', action = act { SendString = '\x1bf' } },
 
   -- pane keybindings
   -- { key = 's', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
@@ -110,25 +120,53 @@ config.window_frame = {
     'Inconsolata Nerd Font',
     'Jetbrains Mono',
   },
-  font_size = 16,
+  font_size = 18,
+  active_titlebar_bg = '#1e2030',
+  inactive_titlebar_bg = '#ff0000',
 }
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, conf, hover, max_width)
+  local title = tab.active_pane.title
+  if tab.is_active then
+    return {
+      { Background = { Color = '#363a4f' } },
+      { Foreground = { Color = '#cad3f5' } },
+      { Text = ' ' .. title .. ' ' },
+    }
+  end
+  if tab.is_last_active then
+    return {
+      { Background = { Color = '#f5bde6' } },
+      { Foreground = { Color = '#cad3f5' } },
+      { Text = ' ' .. title .. '*' },
+    }
+  end
+  if not tab.is_active then
+    return {
+      { Background = { Color = '#363a4f' } },
+      { Foreground = { Color = '#cad3f5' } },
+      { Text = ' ' .. title .. ' ' },
+    }
+  end
+  return tab.active_pane.title
+end)
 
 wezterm.on('update-status', function(window, pane)
   -- workspace name
   local stat = window:active_workspace()
-  local stat_color = '#EEE8D5'
+  local stat_color = '#c6a0f6'
 
   if window:active_key_table() then
     stat = window:active_key_table()
-    stat_color = '#676767'
+    stat_color = '#8aadf4'
   end
 
   if window:leader_is_active() then
     stat = 'LDR'
-    stat_color = '#FFE8D5'
+    stat_color = '#f5bde6'
   end
 
-  local time = wezterm.strftime '%H:%M'
+  local time = wezterm.strftime '%a %b/%d %H:%M'
 
   local cwd = pane:get_current_working_dir()
   if cwd ~= nil and cwd.scheme == 'file' then
@@ -144,6 +182,8 @@ wezterm.on('update-status', function(window, pane)
   cmd = string.gsub(cmd, cmd_rx, '%2')
 
   window:set_left_status(wezterm.format {
+    { Background = { Color = '#1e2030' } },
+    -- { Foreground = { Color = '#cad3f5' } },
     { Foreground = { Color = stat_color } },
     { Text = ' ' },
     { Text = wezterm.nerdfonts.oct_table .. '  ' .. stat },
@@ -151,11 +191,13 @@ wezterm.on('update-status', function(window, pane)
   })
 
   window:set_right_status(wezterm.format {
+    { Background = { Color = '#1e2030' } },
+    -- { Foreground = { Color = '#cad3f5' } },
+    { Foreground = { Color = stat_color } },
     { Text = ' ' },
     { Text = wezterm.nerdfonts.md_folder .. '  ' .. cwd },
     { Text = ' | ' },
     { Text = wezterm.nerdfonts.md_application .. '  ' .. cmd },
-    'ResetAttributes',
     { Text = ' | ' },
     { Text = wezterm.nerdfonts.md_clock .. ' ' .. time },
     { Text = ' ' },

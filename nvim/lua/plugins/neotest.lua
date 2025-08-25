@@ -14,9 +14,10 @@ return {
         dap = {
           justMyCode = false,
         },
-        -- args = {
-        --   '-m integration -p no:warnings',
-        -- },
+        args = {
+          "-p no:warnings",
+          "-vvv",
+        },
       },
       ["rustaceanvim.neotest"] = {},
     },
